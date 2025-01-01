@@ -4,7 +4,10 @@ export interface UserInterface {
   _id?: mongoose.Types.ObjectId;
   role?: number;
   name?: String;
+  firstName?: String;
+  lastName?: String;
   email?: string;
+  picture?: string;
   verified?: Boolean;
   password?: String;
   salt?: String;
@@ -15,6 +18,8 @@ export const userSchema = new Schema<UserInterface>({
   // 0: Admin, 1:User
   role: { type: Number, enum: [0, 1], ref: "Role", required: true, default: 1 },
   name: { type: String, required: true, min: 5, max: 100, trim: true },
+  firstName: { type: String, min: 5, max: 100, trim: true },
+  lastName: { type: String, min: 5, max: 100, trim: true },
   email: {
     type: String,
     required: true,
@@ -24,6 +29,7 @@ export const userSchema = new Schema<UserInterface>({
     trim: true,
     unique: true,
   },
+  picture: { type: String },
   verified: { type: Boolean, default: false, required: true },
   password: {
     type: String,
